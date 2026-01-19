@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оздоровительный центр "КДМ" - Сертификаты</title>
+    <link rel="icon" type="image/png" href="img/icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Smooth fade-in for tab content */
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Navigation link hover effect */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #1E3A8A;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        .nav-link:hover {
+            color: #1E3A8A;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            z-index: 100;
+            overflow: hidden;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            display: block;
+            padding: 12px 16px;
+            color: #1e3a8a;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        .dropdown-content a:hover,
+        .dropdown-content a.active {
+            background-color: #f0f9ff;
+        }
+
+        .mobile-dropdown-content {
+            display: none;
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+        .mobile-dropdown.active .mobile-dropdown-content {
+            display: block;
+        }
+
+        /* Mobile menu styling */
+        #mobile-menu {
+            display: none;
+        }
+        #mobile-menu.active {
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            #mobile-menu-button {
+                display: block;
+            }
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                background-color: #f8fafc;
+                margin-top: 8px;
+                border-radius: 4px;
+            }
+        }
+        @media (min-width: 769px) {
+            #mobile-menu-button, #mobile-menu {
+                display: none;
+            }
+        }
+
+        /* Gallery styles */
+        .gallery-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .gallery-header h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #1E3A8A;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        .gallery-header h1::after {
+            content: '';
+            position: absolute;
+            width: 40%;
+            height: 4px;
+            background: linear-gradient(to right, #3B82F6, #1E3A8A);
+            bottom: -0.5rem;
+            left: 30%;
+            border-radius: 2px;
+        }
+        .gallery-header p {
+            font-size: 1.125rem;
+            color: #4B5563;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.75;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            padding: 1.5rem;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            aspect-ratio: 4 / 3;
+            cursor: pointer;
+        }
+        .gallery-item:hover {
+            transform: translateY(-0.5rem);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+            padding: 1.5rem;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        .gallery-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .gallery-description {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            overflow: auto;
+            animation: fadeIn 0.3s;
+        }
+        .modal-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+        .modal-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            animation: zoomIn 0.3s;
+        }
+        .close {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            color: #f1f1f1;
+            font-size: 2.5rem;
+            font-weight: bold;
+            transition: color 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: #d1d5db;
+            transform: scale(1.1);
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+
+        /* Responsive adjustments for gallery */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            .gallery-header h1 {
+                font-size: 1.875rem;
+            }
+            .gallery-header p {
+                font-size: 1rem;
+            }
+            .modal-image {
+                max-width: 95%;
+                max-height: 85%;
+            }
+            .close {
+                font-size: 2rem;
+                top: 1rem;
+                right: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800 antialiased">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 sm:py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
+                    <div class="bg-blue-100 p-2 rounded-full mr-2 sm:mr-3">
+                        <img src="img/1.png" alt="иконка" class="w-8 h-8 sm:w-10 sm:h-10">
+                    </div>
+                    <h1 class="text-lg sm:text-xl md:text-2xl font-bold text-blue-800">Оздоровительный центр "КДМ"</h1>
+                </a>
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars text-blue-800 text-xl sm:text-2xl"></i>
+                </button>
+                <nav class="hidden md:flex space-x-2 lg:space-x-4">
+                    <a href="index.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base">Главная</a>
+                    <a href="news.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base hidden">Новости</a>
+                    
+                    <!-- Dropdown menu for desktop -->
+                    <div class="dropdown">
+                        <a href="about.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base flex items-center">
+                            О нас <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="about.html">О нас</a>
+                            <a href="kin.html">Кинезиолог</a>
+                            <a href="mas.html">Массажист</a>
+                            <a href="ost.html">Остеопат</a>
+                        </div>
+                    </div>
+                    
+                    <a href="gallery.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base active">Галерея</a>
+                    <a href="service.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base">Услуги</a>
+                    <a href="contacts.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base">Контакты</a>
+                </nav>
+            </div>
+            
+            <!-- Mobile menu -->
+            <nav id="mobile-menu" class="md:hidden flex-col space-y-2 mt-3">
+                <a href="index.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm">Главная</a>
+                <a href="news.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm hidden">Новости</a>
+                
+                <!-- Mobile dropdown -->
+                <div class="mobile-dropdown">
+                    <div class="flex justify-between items-center nav-link px-3 py-2 text-blue-800 font-medium text-sm cursor-pointer mobile-dropdown-toggle">
+                        <span>О нас</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </div>
+                    <div class="mobile-dropdown-content">
+                        <a href="about.html" class="block py-2 text-blue-700 text-sm">О нас</a>
+                        <a href="kin.html" class="block py-2 text-blue-700 text-sm">Кинезиолог</a>
+                        <a href="mas.html" class="block py-2 text-blue-700 text-sm">Массажист</a>
+                        <a href="ost.html" class="block py-2 text-blue-700 text-sm">Остеопат</a>
+                    </div>
+                </div>
+                
+                <a href="gallery.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm active">Галерея</a>
+                <a href="service.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm">Услуги</a>
+                <a href="contacts.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm">Контакты</a>
+                <hr class="border-gray-300">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6 sm:py-8">
+        <!-- Page Header -->
+        <div class="gallery-container">
+            <div class="gallery-header">
+                <h1>Сертификаты и дипломы</h1>
+                <p>Подтверждение квалификации специалистов и центра</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openModal('img/sert/sert_2.jpg')">
+                    <img src="img/sert/sert_2.jpg" alt="Сертификат 1" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 1</div>
+                        <div class="gallery-description">Сертификат участника</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_6.jpg')">
+                    <img src="img/sert/sert_6.jpg" alt="Сертификат 2" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 2</div>
+                        <div class="gallery-description">Удостоверение о повышении квалификации</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_3.jpg')">
+                    <img src="img/sert/sert_3.jpg" alt="Сертификат 3" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 3</div>
+                        <div class="gallery-description">Сертификат специалиста</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_8.jpg')">
+                    <img src="img/sert/sert_8.jpg" alt="Сертификат 4" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 4</div>
+                        <div class="gallery-description">Диплом о медицинском образовании</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_9.jpg')">
+                    <img src="img/sert/sert_9.jpg" alt="Сертификат 5" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 5</div>
+                        <div class="gallery-description">Сертификат аккредитации</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_10.jpg')">
+                    <img src="img/sert/sert_10.jpg" alt="Сертификат 6" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 6</div>
+                        <div class="gallery-description">Диплом о высшем образовании</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_12.jpg')">
+                    <img src="img/sert/sert_12.jpg" alt="Сертификат 7" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 7</div>
+                        <div class="gallery-description">Диплом о профессиональной переподготовке</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_4.jpg')">
+                    <img src="img/sert/sert_4.jpg" alt="Сертификат 8" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 8</div>
+                        <div class="gallery-description">Диплом о профессиональной подготовке</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_5.jpg')">
+                    <img src="img/sert/sert_5.jpg" alt="Сертификат 9" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 9</div>
+                        <div class="gallery-description">Сертификат международного стандарта</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_7.jpg')">
+                    <img src="img/sert/sert_7.jpg" alt="Сертификат 10" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 10</div>
+                        <div class="gallery-description">Сертификат качества услуг</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_11.jpg')">
+                    <img src="img/sert/sert_11.jpg" alt="Сертификат 11" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 11</div>
+                        <div class="gallery-description">Сертификат соответствия стандартам</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_13.jpg')">
+                    <img src="img/sert/sert_13.jpg" alt="Сертификат 12" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 12</div>
+                        <div class="gallery-description">Сертификат безопасности услуг</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_14.jpg')">
+                    <img src="img/sert/sert_14.jpg" alt="Сертификат 13" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 13</div>
+                        <div class="gallery-description">Диплом о медицинской специализации</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_15.jpg')">
+                    <img src="img/sert/sert_15.jpg" alt="Сертификат 14" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 14</div>
+                        <div class="gallery-description">Сертификат качества обслуживания</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_16.jpg')">
+                    <img src="img/sert/sert_16.jpg" alt="Сертификат 15" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 15</div>
+                        <div class="gallery-description">Диплом о дополнительном образовании</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_17.jpg')">
+                    <img src="img/sert/sert_17.jpg" alt="Сертификат 16" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 16</div>
+                        <div class="gallery-description">Сертификат профессионального мастерства</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_18.jpg')">
+                    <img src="img/sert/sert_18.jpg" alt="Сертификат 17" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 17</div>
+                        <div class="gallery-description">Диплом о курсах повышения квалификации</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_19.jpg')">
+                    <img src="img/sert/sert_19.jpg" alt="Сертификат 18" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 18</div>
+                        <div class="gallery-description">Сертификат соответствия международным стандартам</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="openModal('img/sert/sert_1.jpg')">
+                    <img src="img/sert/sert_1.jpg" alt="Сертификат 19" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Сертификат 19</div>
+                        <div class="gallery-description">Диплом о повышении квалификации</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Fullscreen Image -->
+        <div id="imageModal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-content">
+                <img id="expandedImage" class="modal-image">
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-6 sm:py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
+                <div>
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold mb-4">О центре "КДМ"</h3>
+                    <p class="text-blue-200 text-sm sm:text-base">Мы помогаем нашим клиентам обрести здоровье и гармонию с помощью современных методик и индивидуального подхода.</p>
+                </div>
+                <div>
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold mb-4">Услуги</h3>
+                    <ul class="space-y-2">
+                        <li><a href="ost.html" class="text-blue-200 hover:text-white transition text-sm sm:text-base">Остеопатия</a></li>
+                        <li><a href="kin.html" class="text-blue-200 hover:text-white transition text-sm sm:text-base">Кинезиология</a></li>
+                        <li><a href="mas.html" class="text-blue-200 hover:text-white transition text-sm sm:text-base">Массаж</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold mb-4">Контакты</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-blue-300 text-sm sm:text-base"></i>
+                            <span class="text-blue-200 text-sm sm:text-base">Санкт-Петербург, улица Комиссара Смирнова, 15В, Выборгский ДК</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-blue-300 text-sm sm:text-base"></i>
+                            <span class="text-blue-200 text-sm sm:text-base">+7 (965) 777-90-90</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-blue-300 text-sm sm:text-base"></i>
+                            <span class="text-blue-200 text-sm sm:text-base">info@kdmsenter.ru</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="mt-4">
+                        <p class="text-blue-200 mb-2 text-sm sm:text-base">Мы в соцсетях:</p>
+                        <div class="flex space-x-3 sm:space-x-4">
+                            <a href="https://m.vk.com/therunoflife?from=groups" 
+                               class="bg-blue-800 hover:bg-blue-700 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition"
+                               target="_blank" rel="noopener noreferrer"
+                               onclick="window.open(this.href,'_blank'); return false;"
+                               title="Наша группа ВКонтакте">
+                               <i class="fab fa-vk text-white text-sm sm:text-base"></i>
+                            </a>
+                            <a href="https://t.me/kinesiologrustam" 
+                               class="bg-blue-800 hover:bg-blue-700 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition"
+                               target="_blank" rel="noopener noreferrer"
+                               onclick="window.open(this.href,'_blank'); return false;"
+                               title="Написать в Telegram">
+                               <i class="fab fa-telegram text-white text-sm sm:text-base"></i>
+                            </a>
+                            <a href="https://wa.me/+79657779090" 
+                               class="bg-blue-800 hover:bg-blue-700 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition"
+                               target="_blank" rel="noopener noreferrer"
+                               onclick="window.open(this.href,'_blank'); return false;"
+                               title="Написать в WhatsApp">
+                               <i class="fab fa-whatsapp text-white text-sm sm:text-base"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-blue-800 mt-6 sm:mt-8 pt-4 sm:pt-6 text-center text-blue-300">
+                <p class="text-sm sm:text-base">© 2025 Оздоровительный центр "КДМ". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                const icon = mobileMenuButton.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+
+            // Mobile dropdown toggle
+            const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+            mobileDropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const dropdown = this.closest('.mobile-dropdown');
+                    dropdown.classList.toggle('active');
+
+                    const icon = this.querySelector('i');
+                    if (icon) {
+                        icon.classList.toggle('fa-chevron-down');
+                        icon.classList.toggle('fa-chevron-up');
+                    }
+                });
+            });
+
+            // Modal functionality
+            window.openModal = function(imageSrc) {
+                const modal = document.getElementById('imageModal');
+                const modalImg = document.getElementById('expandedImage');
+                modal.style.display = 'flex';
+                modalImg.src = imageSrc;
+                modal.onclick = function(e) {
+                    if (e.target === modal) {
+                        closeModal();
+                    }
+                };
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        closeModal();
+                    }
+                });
+            };
+
+            window.closeModal = function() {
+                document.getElementById('imageModal').style.display = 'none';
+            };
+        });
+    </script>
+</body>
+</html>

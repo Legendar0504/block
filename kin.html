@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профессиональный массажист | Обо мне</title>
+    <link rel="icon" type="image/png" href="img/icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .menu-item {
+            transition: all 0.3s ease;
+        }
+        .menu-item:hover {
+            transform: translateY(-3px);
+        }
+        .section-active {
+            border-bottom: 2px solid #5D8AA8;
+            color: #5D8AA8;
+        }
+        .massage-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .massage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #5D8AA8;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .nav-link.active::after {
+            width: 100%;
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            z-index: 100;
+            overflow: hidden;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            display: block;
+            padding: 12px 16px;
+            color: #1e3a8a;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        .dropdown-content a:hover,
+        .dropdown-content a.active {
+            background-color: #f0f9ff;
+        }
+        .mobile-dropdown-content {
+            display: none;
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+        .mobile-dropdown.active .mobile-dropdown-content {
+            display: block;
+        }
+        /* Hide mobile menu by default */
+        #mobile-menu {
+            display: none;
+        }
+        /* Show mobile menu when active */
+        @media (max-width: 768px) {
+            #mobile-menu.active {
+                display: flex;
+            }
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                background-color: #f8fafc;
+                margin-top: 8px;
+                border-radius: 4px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-blue-50 font-sans">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 sm:py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
+                    <div class="bg-blue-100 p-2 rounded-full mr-2 sm:mr-3">
+                        <img src="img/1.png" alt="иконка" class="w-8 h-8 sm:w-10 sm:h-10">
+                    </div>
+                    <h1 class="text-lg sm:text-xl md:text-2xl font-bold text-blue-800">Оздоровительный центр "КДМ"</h1>
+                </a>
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars text-blue-800 text-xl sm:text-2xl"></i>
+                </button>
+                <nav class="hidden md:flex space-x-2 lg:space-x-4">
+                    <a href="index.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base">Главная</a>
+                    <a href="news.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base hidden">Новости</a>
+                    
+                    <!-- Dropdown menu for desktop -->
+                    <div class="dropdown">
+                        <a href="about.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base flex items-center active">
+                            О нас <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="about.html">О нас</a>
+                            <a href="kin.html" class="active">Кинезиолог</a>
+                            <a href="mas.html">Массажист</a>
+                            <a href="ost.html">Остеопат</a>
+                        </div>
+                    </div>
+                    
+                    <a href="gallery.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base">Галерея</a>
+                    <a href="service.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base">Услуги</a>
+                    <a href="contacts.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base">Контакты</a>
+                </nav>
+            </div>
+            
+            <!-- Mobile menu -->
+            <nav id="mobile-menu" class="md:hidden flex-col space-y-2 mt-3">
+                <a href="index.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm">Главная</a>
+                <a href="news.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm hidden">Новости</a>
+                
+                <!-- Mobile dropdown -->
+                <div class="mobile-dropdown">
+                    <div class="flex justify-between items-center nav-link px-3 py-2 text-blue-800 font-medium text-sm cursor-pointer mobile-dropdown-toggle">
+                        <span>О нас</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </div>
+                    <div class="mobile-dropdown-content">
+                        <a href="about.html" class="block py-2 text-blue-700 text-sm">О нас</a>
+                        <a href="kin.html" class="block py-2 text-blue-700 text-sm active">Кинезиолог</a>
+                        <a href="mas.html" class="block py-2 text-blue-700 text-sm">Массажист</a>
+                        <a href="ost.html" class="block py-2 text-blue-700 text-sm">Остеопат</a>
+                    </div>
+                </div>
+                
+                <a href="gallery.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm">Галерея</a>
+                <a href="service.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm">Услуги</a>
+                <a href="contacts.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm">Контакты</a>
+                <hr class="border-gray-300">
+            </nav>
+        </div>
+    </header>
+
+    <!-- About Massage Therapist Section -->
+    <section id="about" class="py-16 bg-gradient-to-r from-blue-50 to-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-blue-800 mb-4">О массажисте</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="md:w-1/3 flex justify-center">
+                    <div class="relative">
+                        <img src="img/1.png" 
+                             alt="Профессиональный массажист" 
+                             class="rounded-lg shadow-xl w-full max-w-md h-auto object-cover">
+                        <div class="absolute -bottom-4 -right-4 bg-blue-600 text-white p-4 rounded-lg shadow-lg">
+                            <p class="text-xl font-bold">8+ лет</p>
+                            <p class="text-sm">опыта</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-2/3 mt-8 md:mt-0">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">Рустам Батршин (Кинезиолог)</h3>
+                    <p class="text-blue-700 mb-6 leading-relaxed">
+                        Сертифицированный массажист с более чем 8-летним опытом работы. Специализируюсь на различных техниках массажа, 
+                        включая лечебный, расслабляющий, спортивный и антицеллюлитный массаж. Моя цель - помочь клиентам достичь 
+                        гармонии тела и духа, избавиться от стресса и болевых ощущений.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-certificate text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-blue-800 mb-1">Образование</h4>
+                                <p class="text-blue-700 text-sm">
+                                    Высшее медицинское образование, специализация "Лечебный массаж". 
+                                    Дополнительные курсы по тайскому и спортивному массажу.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-hand-holding-heart text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-blue-800 mb-1">Подход</h4>
+                                <p class="text-blue-700 text-sm">
+                                    Индивидуальный подход к каждому клиенту. Перед сеансом провожу консультацию 
+                                    для определения оптимальной техники массажа.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-award text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-blue-800 mb-1">Достижения</h4>
+                                <p class="text-blue-700 text-sm">
+                                    Победитель конкурса "Лучший массажист года 2022". 
+                                    Автор методики комбинированного массажа для офисных работников.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-heartbeat text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-blue-800 mb-1">Философия</h4>
+                                <p class="text-blue-700 text-sm">
+                                    Верю в целостный подход к здоровью. Массаж - это не только работа с телом, 
+                                    но и забота о психологическом комфорте клиента.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://dikidi.net/1972396" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                            Записаться на прием
+                        </a>
+                        <a href="service.html" class="border border-blue-600 text-blue-600 hover:bg-blue-50 font-medium py-3 px-6 rounded-lg transition duration-300">
+                            Посмотреть услуги
+                        </a>
+                        <a href="gallery.html#tab2" class="border border-blue-600 text-blue-600 hover:bg-blue-50 font-medium py-3 px-6 rounded-lg transition duration-300">
+                            Посмотреть сертификаты
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-6 sm:py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
+                <div>
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold mb-4">О центре "КДМ"</h3>
+                    <p class="text-blue-200 text-sm sm:text-base">Мы помогаем нашим клиентам обрести здоровье и гармонию с помощью современных методик и индивидуального подхода.</p>
+                </div>
+                <div>
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold mb-4">Услуги</h3>
+                    <ul class="space-y-2">
+                        <li><a href="ost.html" class="text-blue-200 hover:text-white transition text-sm sm:text-base">Остеопатия</a></li>
+                        <li><a href="kin.html" class="text-blue-200 hover:text-white transition text-sm sm:text-base">Кинезиология</a></li>
+                        <li><a href="mas.html" class="text-blue-200 hover:text-white transition text-sm sm:text-base">Массаж</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold mb-4">Контакты</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-blue-300 text-sm sm:text-base"></i>
+                            <span class="text-blue-200 text-sm sm:text-base">Санкт-Петербург, улица Комиссара Смирнова, 15В, Выборгский ДК</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-blue-300 text-sm sm:text-base"></i>
+                            <span class="text-blue-200 text-sm sm:text-base">+7 (965) 777-90-90</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-blue-300 text-sm sm:text-base"></i>
+                            <span class="text-blue-200 text-sm sm:text-base">info@kdmsenter.ru</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="mt-4">
+                        <p class="text-blue-200 mb-2 text-sm sm:text-base">Мы в соцсетях:</p>
+                        <div class="flex space-x-3 sm:space-x-4">
+                            <a href="https://m.vk.com/therunoflife?from=groups" 
+                               class="bg-blue-800 hover:bg-blue-700 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition"
+                               target="_blank"
+                               title="Наша группа ВКонтакте">
+                               <i class="fab fa-vk text-white text-sm sm:text-base"></i>
+                            </a>
+                            <a href="https://t.me/kinesiologrustam" 
+                               class="bg-blue-800 hover:bg-blue-700 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition"
+                               target="_blank"
+                               title="Написать в Telegram">
+                               <i class="fab fa-telegram text-white text-sm sm:text-base"></i>
+                            </a>
+                            <a href="https://wa.me/+79657779090" 
+                               class="bg-blue-800 hover:bg-blue-700 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition"
+                               target="_blank"
+                               title="Написать в WhatsApp">
+                               <i class="fab fa-whatsapp text-white text-sm sm:text-base"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-blue-800 mt-6 sm:mt-8 pt-4 sm:pt-6 text-center text-blue-300">
+                <p class="text-sm sm:text-base">© 2025 Оздоровительный центр "КДМ". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                const icon = mobileMenuButton.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+
+            // Mobile dropdown toggle
+            const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+            mobileDropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const dropdown = this.closest('.mobile-dropdown');
+                    dropdown.classList.toggle('active');
+
+                    const icon = this.querySelector('i');
+                    if (icon) {
+                        icon.classList.toggle('fa-chevron-down');
+                        icon.classList.toggle('fa-chevron-up');
+                    }
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (!mobileMenu.classList.contains('active')) {
+                            mobileMenu.classList.remove('active');
+                            const icon = mobileMenuButton.querySelector('i');
+                            icon.classList.add('fa-bars');
+                            icon.classList.remove('fa-times');
+                        }
+                    }
+                });
+            });
+
+            // Highlight active menu item on scroll
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a[href^="#"], #mobile-menu a[href^="#"]');
+                
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('section-active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('section-active');
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        // Force social links to open in a new tab
+        (function(){
+            const selectors = [
+                'a[href^="https://m.vk.com/therunoflife"]',
+                'a[href^="https://t.me/kinesiologrustam"]',
+                'a[href^="https://wa.me/+79657779090"]'
+            ];
+            document.querySelectorAll(selectors.join(',')).forEach(a => {
+                a.setAttribute('target','_blank');
+                a.setAttribute('rel','noopener noreferrer');
+                a.addEventListener('click', function(e){
+                    e.preventDefault();
+                    window.open(this.href, '_blank');
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

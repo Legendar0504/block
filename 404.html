@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница не найдена (404) | Оздоровительный центр "КДМ"</title>
+    <link rel="icon" type="image/png" href="img/icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #5D8AA8;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .nav-link.active::after {
+            width: 100%;
+        }
+        /* Dropdown menu */
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            z-index: 100;
+            overflow: hidden;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            display: block;
+            padding: 12px 16px;
+            color: #1e3a8a;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        .dropdown-content a:hover {
+            background-color: #f0f9ff;
+        }
+        /* Mobile dropdown */
+        .mobile-dropdown-content {
+            display: none;
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+        .mobile-dropdown.active .mobile-dropdown-content {
+            display: block;
+        }
+        /* Hide mobile menu by default */
+        #mobile-menu {
+            display: none;
+        }
+        /* Animation for 404 content */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-blue-50 font-sans text-blue-700">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 sm:py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
+                    <div class="bg-blue-100 p-2 rounded-full mr-2 sm:mr-3">
+                        <img src="img/1.png" alt="иконка" class="w-8 h-8 sm:w-10 sm:h-10">
+                    </div>
+                    <h1 class="text-lg sm:text-xl md:text-2xl font-bold text-blue-800">Оздоровительный центр "КДМ"</h1>
+                </a>
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars text-blue-800 text-xl sm:text-2xl"></i>
+                </button>
+                <nav class="hidden md:flex space-x-2 lg:space-x-4">
+                    <a href="index.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base">Главная</a>
+                    <a href="news.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base hidden">Новости</a>
+                    
+                    <!-- Dropdown menu for desktop -->
+                    <div class="dropdown">
+                        <a href="about.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base flex items-center">
+                            О нас <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="about.html">О нас</a>
+                            <a href="kin.html">Кинезиолог</a>
+                            <a href="mas.html">Массажист</a>
+                            <a href="ost.html">Остеопат</a>
+                        </div>
+                    </div>
+                    
+                    <a href="gallery.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base">Галерея</a>
+                    <a href="service.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base">Услуги</a>
+                    <a href="contacts.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base">Контакты</a>
+                </nav>
+            </div>
+            
+            <!-- Mobile menu -->
+            <nav id="mobile-menu" class="md:hidden flex-col space-y-2 mt-3">
+                <a href="index.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm">Главная</a>
+                <a href="news.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm hidden">Новости</a>
+                
+                <!-- Mobile dropdown -->
+                <div class="mobile-dropdown">
+                    <div class="flex justify-between items-center nav-link px-3 py-2 text-blue-800 font-medium text-sm cursor-pointer mobile-dropdown-toggle">
+                        <span>О нас</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </div>
+                    <div class="mobile-dropdown-content">
+                        <a href="about.html" class="block py-2 text-blue-700 text-sm">О нас</a>
+                        <a href="kin.html" class="block py-2 text-blue-700 text-sm">Кинезиолог</a>
+                        <a href="mas.html" class="block py-2 text-blue-700 text-sm">Массажист</a>
+                        <a href="ost.html" class="block py-2 text-blue-700 text-sm">Остеопат</a>
+                    </div>
+                </div>
+                
+                <a href="gallery.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm">Галерея</a>
+                <a href="service.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm">Услуги</a>
+                <a href="contacts.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm">Контакты</a>
+                <hr class="border-gray-300">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 sm:py-12">
+        <div class="max-w-4xl mx-auto text-center fade-in">
+            <!-- Error Icon -->
+            <div class="mb-6">
+                <div class="bg-blue-100 p-6 rounded-full w-32 h-32 mx-auto flex items-center justify-center">
+                    <i class="fas fa-exclamation-triangle text-blue-600 text-5xl"></i>
+                </div>
+            </div>
+            
+            <!-- Error Code -->
+            <h1 class="text-7xl sm:text-8xl font-bold text-blue-800 mb-4">404</h1>
+            
+            <!-- Error Message -->
+            <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-6">Страница не найдена</h2>
+            
+            <!-- Description -->
+            <p class="text-lg sm:text-xl text-blue-700 mb-8 max-w-2xl mx-auto">
+                Извините, но такой страницы на нашем сайте не существует. Возможно, вы ошиблись в адресе или страница была перемещена.
+            </p>
+            
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+                <a href="index.html" class="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:scale-105 hover:shadow-lg transition-transform duration-300">
+                    <i class="fas fa-home mr-2"></i>На главную
+                </a>
+                <a href="contacts.html" class="bg-white border border-blue-500 text-blue-600 py-3 px-6 rounded-lg font-semibold hover:bg-blue-50 transition-colors duration-300">
+                    <i class="fas fa-phone-alt mr-2"></i>Связаться с нами
+                </a>
+            </div>
+            
+            <!-- Additional Help -->
+            <div class="bg-blue-100 rounded-xl p-6 sm:p-8 text-left max-w-2xl mx-auto">
+                <h3 class="text-xl font-bold text-blue-900 mb-4">Что можно сделать?</h3>
+                <ul class="space-y-3 text-blue-700">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-blue-600 mt-1 mr-3"></i>
+                        <span>Проверьте правильность введенного адреса</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-blue-600 mt-1 mr-3"></i>
+                        <span>Вернитесь на <a href="index.html" class="text-blue-800 font-semibold hover:underline">главную страницу</a> и воспользуйтесь навигацией</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-blue-600 mt-1 mr-3"></i>
+                        <span>Или свяжитесь с нами для получения помощи</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Dynamic Suggestions (appear after delay) -->
+            <div id="suggestions" class="mt-8 hidden">
+                <!-- Content will be added by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-6 sm:py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 items-start">
+                <div class="min-h-[120px] sm:min-h-[150px]">
+                    <h3 class="text-lg font-bold mb-3">О центре "КДМ"</h3>
+                    <p class="text-blue-200 text-sm">Мы помогаем нашим клиентам обрести здоровье и гармонию с помощью современных методик.</p>
+                </div>
+                <div class="min-h-[120px] sm:min-h-[150px]">
+                    <h3 class="text-lg font-bold mb-3">Услуги</h3>
+                    <ul class="space-y-2">
+                        <li><a href="ost.html" class="text-blue-200 hover:text-white transition block">Остеопатия</a></li>
+                        <li><a href="kin.html" class="text-blue-200 hover:text-white transition block">Кинезиология</a></li>
+                        <li><a href="mas.html" class="text-blue-200 hover:text-white transition block">Массаж</a></li>
+                    </ul>
+                </div>
+                <div class="min-h-[120px] sm:min-h-[150px]">
+                    <h3 class="text-lg font-bold mb-3">Контакты</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-blue-300"></i>
+                            <span class="text-blue-200 text-sm">Санкт-Петербург, ул. Комиссара Смирнова, 15В</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-blue-300"></i>
+                            <span class="text-blue-200 text-sm">+7 (965) 777-90-90</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-blue-300"></i>
+                            <span class="text-blue-200 text-sm">info@kdmsenter.ru</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="min-h-[120px] sm:min-h-[150px]">
+                    <h3 class="text-lg font-bold mb-3">Мы в соцсетях</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://m.vk.com/therunoflife" class="bg-blue-800 hover:bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-vk text-white"></i>
+                        </a>
+                        <a href="https://t.me/kinesiologrustam" class="bg-blue-800 hover:bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-telegram text-white"></i>
+                        </a>
+                        <a href="https://wa.me/+79657779090" class="bg-blue-800 hover:bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-whatsapp text-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-blue-800 mt-6 pt-4 text-center">
+                <p class="text-blue-300 text-sm">© 2025 Оздоровительный центр "КДМ". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                const icon = mobileMenuButton.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+
+            // Mobile dropdown toggle
+            const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+            mobileDropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const dropdown = this.closest('.mobile-dropdown');
+                    dropdown.classList.toggle('active');
+                    
+                    const icon = this.querySelector('i');
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                });
+            });
+            
+            // Show suggestions after delay
+            setTimeout(() => {
+                const suggestions = [
+                    {title: 'Наши услуги', link: '/service.html', description: 'Ознакомьтесь с полным перечнем наших оздоровительных услуг'},
+                    {title: 'Специалисты', link: '/about.html', description: 'Познакомьтесь с нашими опытными специалистами'},
+                    {title: 'Контакты', link: '/contacts.html', description: 'Свяжитесь с нами для консультации'}
+                ];
+                
+                const suggestionsContainer = document.getElementById('suggestions');
+                suggestionsContainer.classList.remove('hidden');
+                suggestionsContainer.classList.add('fade-in');
+                
+                let suggestionsHTML = '<h3 class="text-xl font-bold text-blue-900 mb-4">Возможно, вас заинтересует:</h3><div class="grid grid-cols-1 md:grid-cols-3 gap-4">';
+                
+                suggestions.forEach(suggestion => {
+                    suggestionsHTML += `
+                        <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <h4 class="font-bold text-blue-800 mb-2">${suggestion.title}</h4>
+                            <p class="text-blue-700 text-sm mb-3">${suggestion.description}</p>
+                            <a href="${suggestion.link}" class="text-blue-600 font-semibold text-sm hover:underline">Перейти →</a>
+                        </div>
+                    `;
+                });
+                
+                suggestionsHTML += '</div>';
+                suggestionsContainer.innerHTML = suggestionsHTML;
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оздоровительный центр "КДМ"</title>
+    <link rel="icon" type="image/png" href="img/icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #5D8AA8;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .nav-link.active::after {
+            width: 100%;
+        }
+        /* Dropdown menu */
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            z-index: 100;
+            overflow: hidden;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            display: block;
+            padding: 12px 16px;
+            color: #1e3a8a;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        .dropdown-content a:hover {
+            background-color: #f0f9ff;
+        }
+        /* Mobile dropdown */
+        .mobile-dropdown-content {
+            display: none;
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+        .mobile-dropdown.active .mobile-dropdown-content {
+            display: block;
+        }
+        /* Hide mobile menu by default */
+        #mobile-menu {
+            display: none;
+        }
+        /* Show hamburger icon on mobile */
+        @media (max-width: 768px) {
+            #mobile-menu.active {
+                display: flex;
+            }
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                background-color: #f8fafc;
+                margin-top: 8px;
+                border-radius: 4px;
+            }
+        }
+        :root { --modal-opacity: 0.80; }
+        /* Modal styles for fullscreen image */
+        .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background-color: rgba(0,0,0,var(--modal-opacity)); overflow:auto; }
+        .modal-content { display:flex; justify-content:center; align-items:center; height:100%; width:100%; }
+        .modal-image { max-width:90%; max-height:90%; object-fit:contain; }
+        .close { position:absolute; top:1.5rem; right:2rem; color:#f1f1f1; font-size:2.5rem; font-weight:bold; cursor:pointer; }
+        .close:hover { color:#d1d5db; }
+        
+    </style>
+</head>
+<body class="bg-blue-50 font-sans text-blue-700">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 sm:py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
+                    <div class="bg-blue-100 p-2 rounded-full mr-2 sm:mr-3">
+                        <img src="img/1.png" alt="иконка" class="w-8 h-8 sm:w-10 sm:h-10">
+                    </div>
+                    <h1 class="text-lg sm:text-xl md:text-2xl font-bold text-blue-800">Оздоровительный центр "КДМ"</h1>
+                </a>
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars text-blue-800 text-xl sm:text-2xl"></i>
+                </button>
+                <nav class="hidden md:flex space-x-2 lg:space-x-4">
+                    <a href="index.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base active">Главная</a>
+                    <a href="news.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base hidden">Новости</a>
+                    
+                    <!-- Dropdown menu for desktop -->
+                    <div class="dropdown">
+                        <a href="about.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base flex items-center">
+                            О нас <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="about.html">О нас</a>
+                            <a href="kin.html">Кинезиолог</a>
+                            <a href="mas.html">Массажист</a>
+                            <a href="ost.html">Остеопат</a>
+                        </div>
+                    </div>
+                    
+                    <a href="gallery.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base">Галерея</a>
+                    <a href="service.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base">Услуги</a>
+                    <a href="contacts.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base">Контакты</a>
+                </nav>
+            </div>
+            
+            <!-- Mobile menu -->
+            <nav id="mobile-menu" class="md:hidden flex-col space-y-2 mt-3">
+                <a href="index.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm active">Главная</a>
+                <a href="news.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm hidden">Новости</a>
+                
+                <!-- Mobile dropdown -->
+                <div class="mobile-dropdown">
+                    <div class="flex justify-between items-center nav-link px-3 py-2 text-blue-800 font-medium text-sm cursor-pointer mobile-dropdown-toggle">
+                        <span>О нас</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </div>
+                    <div class="mobile-dropdown-content">
+                        <a href="about.html" class="block py-2 text-blue-700 text-sm">О нас</a>
+                        <a href="kin.html" class="block py-2 text-blue-700 text-sm">Кинезиолог</a>
+                        <a href="mas.html" class="block py-2 text-blue-700 text-sm">Массажист</a>
+                        <a href="ost.html" class="block py-2 text-blue-700 text-sm">Остеопат</a>
+                    </div>
+                </div>
+                
+                <a href="gallery.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm">Галерея</a>
+                <a href="service.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm">Услуги</a>
+                <a href="contacts.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm">Контакты</a>
+                <hr class="border-gray-300">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6 sm:py-8">
+        <!-- Home Tab -->
+        <div id="home" class="tab-content active">
+            <section class="mb-12 sm:mb-16">
+                <div class="bg-blue-100 rounded-xl p-6 sm:p-8 md:p-12 flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-6 md:mb-0 md:pr-6">
+                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mb-4">Здоровье - это гармония тела и души</h2>
+                        <p class="text-base sm:text-lg text-blue-800 mb-6">В нашем центре мы помогаем восстановить баланс организма с помощью современных методик и индивидуального подхода к каждому клиенту.</p>
+                        <a href="https://dikidi.net/1972396" target="_blank" class="inline-block bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:scale-105 hover:shadow-lg transition-transform duration-300 text-center">
+                            Записаться
+                        </a>
+                    </div>
+                    <div class="md:w-1/2">
+                        <img src="img/exit.jpg" 
+                             alt="Оздоровительный центр" 
+                             class="w-full h-auto rounded-xl shadow-lg object-cover">
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-6 sm:py-12 bg-gradient-to-b from-gray-50 to-blue-50">
+                <div class="container mx-auto px-4 sm:px-6">
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-center text-blue-900 mb-6 sm:mb-12">Наши специалисты</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
+                        <!-- Specialist 1: Остеопат -->
+                        <div class="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 flex flex-col h-full">
+                            <div class="bg-blue-100 p-3 sm:p-4 rounded-full w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-bone text-blue-600 text-2xl sm:text-3xl md:text-4xl"></i>
+                            </div>
+                            <h3 class="text-base sm:text-lg md:text-xl font-bold text-center text-blue-800 mb-2">Остеопат</h3>
+                            <p class="text-center text-blue-700 text-sm sm:text-base mb-4">Специалист по восстановлению баланса костно-мышечной системы, работающий с первопричинами проблем.</p>
+                            <a href="ost.html" class="block w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:scale-105 hover:shadow-lg transition-transform duration-300 touch-manipulation text-center mt-auto">
+                                Подробнее
+                            </a>
+                        </div>
+                        <!-- Specialist 2: Кинезиолог -->
+                        <div class="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 flex flex-col h-full">
+                            <div class="bg-blue-100 p-3 sm:p-4 rounded-full w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-brain text-blue-600 text-2xl sm:text-3xl md:text-4xl"></i>
+                            </div>
+                            <h3 class="text-base sm:text-lg md:text-xl font-bold text-center text-blue-800 mb-2">Кинезиолог</h3>
+                            <p class="text-center text-blue-700 text-sm sm:text-base mb-4">Эксперт по мышечному тестированию, помогающий выявить и устранить дисбалансы в организме.</p>
+                            <a href="kin.html" class="block w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:scale-105 hover:shadow-lg transition-transform duration-300 touch-manipulation text-center mt-auto">
+                                Подробнее
+                            </a>
+                        </div>
+                        <!-- Specialist 3: Массажист -->
+                        <div class="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 flex flex-col h-full">
+                            <div class="bg-blue-100 p-3 sm:p-4 rounded-full w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-hands text-blue-600 text-2xl sm:text-3xl md:text-4xl"></i>
+                            </div>
+                            <h3 class="text-base sm:text-lg md:text-xl font-bold text-center text-blue-800 mb-2">Массажист</h3>
+                            <p class="text-center text-blue-700 text-sm sm:text-base mb-4">Профессионал по различным техникам массажа для расслабления, восстановления и оздоровления.</p>
+                            <a href="mas.html" class="block w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:scale-105 hover:shadow-lg transition-transform duration-300 touch-manipulation text-center mt-auto">
+                                Подробнее
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-6 sm:py-12 bg-gradient-to-b from-blue-50 to-gray-50">
+                <div class="container mx-auto px-4 sm:px-6">
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-center text-blue-900 mb-6 sm:mb-12">Наши аппараты</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
+                        <!-- Device 1 -->
+                        <div class="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 group cursor-pointer" onclick="openModal('img/podwi sist.jpg')">
+                            <div class="overflow-hidden rounded-lg mb-4">
+                                <img src="img/podwi sist.jpg" alt="Аппарат 1" class="w-full h-40 sm:h-48 object-cover transform group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <h3 class="text-base sm:text-lg md:text-xl font-bold text-blue-800 mb-2">Подвисная Система</h3>
+                            <p class="text-blue-700 text-sm sm:text-base">Адаптивная система вытяжения и коррекции организма на базе нейромышнчного управления.</p>
+                        </div>
+
+                        <!-- Device 2 -->
+                        <div class="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 group cursor-pointer" onclick="openModal('img/ooop.jpg ')">
+                            <div class="overflow-hidden rounded-lg mb-4">
+                                <img src="img/ooop.jpg" alt="Аппарат 2" class="w-full h-40 sm:h-48 object-cover transform group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <h3 class="text-base sm:text-lg md:text-xl font-bold text-blue-800 mb-2">Налар</h3>
+                            <p class="text-blue-700 text-sm sm:text-base">Высокая надежность и безопасность для клиентов.</p>
+                        </div>
+            </section>
+
+            <section class="bg-white rounded-xl shadow-md p-6 sm:p-8 mb-12 sm:mb-16">
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-center text-blue-900 mb-6 sm:mb-8">Почему выбирают нас?</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="bg-blue-100 p-3 rounded-full mb-3">
+                            <i class="fas fa-user-md text-blue-600 text-xl sm:text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-blue-800 mb-2 text-sm sm:text-base">Опытные специалисты</h3>
+                        <p class="text-sm text-blue-700">Все наши врачи имеют многолетний опыт работы.</p>
+                    </div>
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="bg-blue-100 p-3 rounded-full mb-3">
+                            <i class="fas fa-heart text-blue-600 text-xl sm:text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-blue-800 mb-2 text-sm sm:text-base">Индивидуальный подход</h3>
+                        <p class="text-sm text-blue-700">Индивидуальный подход к каждому клиенту.</p>
+                    </div>
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="bg-blue-100 p-3 rounded-full mb-3">
+                            <i class="fas fa-clipboard-check text-blue-600 text-xl sm:text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-blue-800 mb-2 text-sm sm:text-base">Комплексные методики</h3>
+                        <p class="text-sm text-blue-700">Сочетание различных техник для максимально эффективного результата.</p>
+                    </div>
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="bg-blue-100 p-3 rounded-full mb-3">
+                            <i class="fas fa-home text-blue-600 text-xl sm:text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-blue-800 mb-2 text-sm sm:text-base">Уютная атмосфера</h3>
+                        <p class="text-sm text-blue-700">Комфортные условия для проведения процедур.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-6 sm:py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 items-start">
+                <div class="min-h-[120px] sm:min-h-[150px]">
+                    <h3 class="text-lg font-bold mb-3">О центре "КДМ"</h3>
+                    <p class="text-blue-200 text-sm">Мы помогаем нашим клиентам обрести здоровье и гармонию с помощью современных методик.</p>
+                </div>
+                <div class="min-h-[120px] sm:min-h-[150px]">
+                    <h3 class="text-lg font-bold mb-3">Услуги</h3>
+                    <ul class="space-y-2">
+                        <li><a href="ost.html" class="text-blue-200 hover:text-white transition block">Остеопатия</a></li>
+                        <li><a href="kin.html" class="text-blue-200 hover:text-white transition block">Кинезиология</a></li>
+                        <li><a href="mas.html" class="text-blue-200 hover:text-white transition block">Массаж</a></li>
+                    </ul>
+                </div>
+                <div class="min-h-[120px] sm:min-h-[150px]">
+                    <h3 class="text-lg font-bold mb-3">Контакты</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-blue-300"></i>
+                            <span class="text-blue-200 text-sm">Санкт-Петербург, ул. Комиссара Смирнова, 15В</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-blue-300"></i>
+                            <span class="text-blue-200 text-sm">+7 (965) 777-90-90</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-blue-300"></i>
+                            <span class="text-blue-200 text-sm">info@kdmsenter.ru</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="min-h-[120px] sm:min-h-[150px]">
+                    <h3 class="text-lg font-bold mb-3">Мы в соцсетях</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://m.vk.com/therunoflife" class="bg-blue-800 hover:bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-vk text-white"></i>
+                        </a>
+                        <a href="https://t.me/kinesiologrustam" class="bg-blue-800 hover:bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-telegram text-white"></i>
+                        </a>
+                        <a href="https://wa.me/+79657779090" class="bg-blue-800 hover:bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-whatsapp text-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-blue-800 mt-6 pt-4 text-center">
+                <p class="text-blue-300 text-sm">© 2025 Оздоровительный центр "КДМ". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal helpers (fullscreen image)
+            window.openModal = function(imageSrc) {
+                let modal = document.getElementById('imageModal');
+                let modalImg = document.getElementById('expandedImage');
+                if (!modal) {
+                    modal = document.createElement('div');
+                    modal.id = 'imageModal';
+                    modal.className = 'modal';
+                    modal.innerHTML = '<span class="close" onclick="closeModal()">&times;</span><div class="modal-content"><img id="expandedImage" class="modal-image"></div>';
+                    document.body.appendChild(modal);
+                    modalImg = document.getElementById('expandedImage');
+                }
+                modal.style.display = 'flex';
+                modalImg.src = imageSrc;
+                modal.onclick = function(e) { if (e.target === modal) { closeModal(); } };
+                document.addEventListener('keydown', escHandler);
+            };
+
+            function escHandler(e){ if (e.key === 'Escape') { closeModal(); } }
+            window.closeModal = function(){
+                const modal = document.getElementById('imageModal');
+                if (modal) { modal.style.display = 'none'; }
+                document.removeEventListener('keydown', escHandler);
+            };
+            
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                const icon = mobileMenuButton.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+
+            // Mobile dropdown toggle
+            const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+            mobileDropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const dropdown = this.closest('.mobile-dropdown');
+                    dropdown.classList.toggle('active');
+                    
+                    const icon = this.querySelector('i');
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                });
+            });
+
+            // Tab switching
+            const tabs = document.querySelectorAll('[data-tab]');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Profile link click handler
+            const profileLink = document.getElementById('profileLink');
+            if (profileLink) {
+                profileLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const isAuthenticated = checkAuthentication();
+                    window.location.href = isAuthenticated ? 'profile.html' : 'rlog.html';
+                });
+            }
+            
+            function checkAuthentication() {
+                return localStorage.getItem('authToken') !== null;
+            }
+            
+            // Modal opacity control helper
+            window.setModalOpacity = function(percent) {
+                var value = Math.max(0, Math.min(100, Number(percent)));
+                var decimal = value / 100;
+                document.documentElement.style.setProperty('--modal-opacity', decimal.toString());
+            };
+        });
+    </script>
+    <script type="text/javascript" src="https://dikidi.ru/assets/js/widget_record/widget2.min.js?v=1758698230"></script>
+</body>
+</html>

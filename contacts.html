@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Оздоровительный центр "КДМ" - Контакты</title>
+    <link rel="icon" type="image/png" href="img/icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #5D8AA8;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            z-index: 100;
+            overflow: hidden;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            display: block;
+            padding: 12px 16px;
+            color: #1e3a8a;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        .dropdown-content a:hover,
+        .dropdown-content a.active {
+            background-color: #f0f9ff;
+        }
+        .mobile-dropdown-content {
+            display: none;
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+        .mobile-dropdown.active .mobile-dropdown-content {
+            display: block;
+        }
+        #mobile-menu {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            #mobile-menu.active {
+                display: flex;
+            }
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                background-color: #f8fafc;
+                margin-top: 8px;
+                border-radius: 4px;
+            }
+        }
+        body {
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 16rem; /* 256px для мобильных */
+        }
+        @media (min-width: 640px) {
+            .map-container {
+                min-height: 20rem; /* 320px для планшетов */
+            }
+        }
+        @media (min-width: 768px) {
+            .map-container {
+                min-height: 100%; /* Полная высота родителя для ПК */
+            }
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
+</head>
+<body class="bg-blue-50 font-sans text-gray-700">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 sm:py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
+                    <div class="bg-blue-100 p-2 rounded-full mr-2 sm:mr-3">
+                        <img src="img/1.png" alt="иконка" class="w-8 h-8 sm:w-10 sm:h-10">
+                    </div>
+                    <h1 class="text-lg sm:text-xl md:text-2xl font-bold text-blue-800">Оздоровительный центр "КДМ"</h1>
+                </a>
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars text-blue-800 text-xl sm:text-2xl"></i>
+                </button>
+                <nav class="hidden md:flex space-x-2 lg:space-x-4">
+                    <a href="index.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base">Главная</a>
+                    <a href="news.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base hidden">Новости</a>
+                    
+                    <!-- Dropdown menu for desktop -->
+                    <div class="dropdown">
+                        <a href="about.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base flex items-center">
+                            О нас <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="about.html">О нас</a>
+                            <a href="kin.html">Кинезиолог</a>
+                            <a href="mas.html">Массажист</a>
+                            <a href="ost.html">Остеопат</a>
+                        </div>
+                    </div>
+                    
+                    <a href="gallery.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base">Галерея</a>
+                    <a href="service.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base">Услуги</a>
+                    <a href="contacts.html" class="nav-link px-2 py-2 text-blue-800 font-medium text-sm lg:text-base active">Контакты</a>
+                </nav>
+            </div>
+            
+            <!-- Mobile menu -->
+            <nav id="mobile-menu" class="md:hidden flex-col space-y-2 mt-3">
+                <a href="index.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm">Главная</a>
+                <a href="news.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm hidden">Новости</a>
+                
+                <!-- Mobile dropdown -->
+                <div class="mobile-dropdown">
+                    <div class="flex justify-between items-center nav-link px-3 py-2 text-blue-800 font-medium text-sm cursor-pointer mobile-dropdown-toggle">
+                        <span>О нас</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </div>
+                    <div class="mobile-dropdown-content">
+                        <a href="about.html" class="block py-2 text-blue-700 text-sm">О нас</a>
+                        <a href="kin.html" class="block py-2 text-blue-700 text-sm">Кинезиолог</a>
+                        <a href="mas.html" class="block py-2 text-blue-700 text-sm">Массажист</a>
+                        <a href="ost.html" class="block py-2 text-blue-700 text-sm">Остеопат</a>
+                    </div>
+                </div>
+                
+                <a href="gallery.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm">Галерея</a>
+                <a href="service.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm">Услуги</a>
+                <a href="contacts.html" class="nav-link px-3 py-2 text-blue-800 font-medium text-sm active">Контакты</a>
+                <hr class="border-gray-300">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6 sm:py-8">
+        <!-- Contacts Section -->
+        <section class="mb-10 sm:mb-12">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-blue-900 mb-6 sm:mb-8">Контакты</h2>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-1/2 p-4 sm:p-6 md:p-8">
+                        <h3 class="text-base sm:text-lg md:text-xl font-bold text-blue-800 mb-4 sm:mb-6">Как нас найти</h3>
+                        <div class="flex items-start mb-4 sm:mb-6">
+                            <div class="bg-blue-100 p-2 rounded-full mr-3 sm:mr-4">
+                                <i class="fas fa-map-marker-alt text-blue-600 text-sm sm:text-base"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-blue-800 mb-1 text-sm sm:text-base">Адрес</h4>
+                                <p class="text-blue-700 text-sm sm:text-base">Санкт-Петербург, улица Комиссара Смирнова, 15В, Выборгский ДК</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start mb-4 sm:mb-6">
+                            <div class="bg-blue-100 p-2 rounded-full mr-3 sm:mr-4">
+                                <i class="fas fa-phone-alt text-blue-600 text-sm sm:text-base"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-blue-800 mb-1 text-sm sm:text-base">Телефоны</h4>
+                                <p class="text-blue-700 text-sm sm:text-base">+7 (965) 777-90-90</p>
+                                <p class="text-blue-700 text-sm sm:text-base">+7 (911) 100-55-75</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start mb-4 sm:mb-6">
+                            <div class="bg-blue-100 p-2 rounded-full mr-3 sm:mr-4">
+                                <i class="fas fa-envelope text-blue-600 text-sm sm:text-base"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-blue-800 mb-1 text-sm sm:text-base">Email</h4>
+                                <p class="text-blue-700 text-sm sm:text-base">info@kdmsenter.ru</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start mb-4 sm:mb-6">
+                            <div class="bg-blue-100 p-2 rounded-full mr-3 sm:mr-4">
+                                <i class="fas fa-clock text-blue-600 text-sm sm:text-base"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-blue-800 mb-1 text-sm sm:text-base">Режим работы</h4>
+                                <p class="text-blue-700 text-sm sm:text-base">Пн-Пт: 9:00 - 21:00</p>
+                                <p class="text-blue-700 text-sm sm:text-base">Сб-Вс: 10:00 - 21:00</p>
+                            </div>
+                        </div>
+                        <div class="mt-6 sm:mt-8">
+                            <h4 class="font-bold text-blue-800 mb-4 text-sm sm:text-base">Мы в социальных сетях</h4>
+                            <div class="flex space-x-3 sm:space-x-4">
+                                <a href="https://m.vk.com/therunoflife?from=groups" 
+                                   class="bg-blue-100 hover:bg-blue-200 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition"
+                                   target="_blank"
+                                   title="Наша группа ВКонтакте">
+                                    <i class="fab fa-vk text-blue-600 text-sm sm:text-base"></i>
+                                </a>
+                                <a href="https://t.me/kinesiologrustam" 
+                                   class="bg-blue-100 hover:bg-blue-200 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition"
+                                   target="_blank"
+                                   title="Написать в Telegram">
+                                    <i class="fab fa-telegram text-blue-600 text-sm sm:text-base"></i>
+                                </a>
+                                <a href="https://wa.me/+79657779090" 
+                                   class="bg-blue-100 hover:bg-blue-200 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition"
+                                   target="_blank"
+                                   title="Написать в WhatsApp">
+                                    <i class="fab fa-whatsapp text-blue-600 text-sm sm:text-base"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="map-container" style="width:100%; height:400px;">
+                            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Aceeae0c626f486cd1d531d789126b7c0e430ad6833ff6aa8dfe0c94ee690c893&amp;source=constructor" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-6 sm:py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
+                <div>
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold mb-4">О центре "КДМ"</h3>
+                    <p class="text-blue-200 text-sm sm:text-base">Мы помогаем нашим клиентам обрести здоровье и гармонию с помощью современных методик и индивидуального подхода.</p>
+                </div>
+                <div>
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold mb-4">Услуги</h3>
+                    <ul class="space-y-2">
+                        <li><a href="ost.html" class="text-blue-200 hover:text-white transition text-sm sm:text-base">Остеопатия</a></li>
+                        <li><a href="kin.html" class="text-blue-200 hover:text-white transition text-sm sm:text-base">Кинезиология</a></li>
+                        <li><a href="mas.html" class="text-blue-200 hover:text-white transition text-sm sm:text-base">Массаж</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold mb-4">Контакты</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-blue-300 text-sm sm:text-base"></i>
+                            <span class="text-blue-200 text-sm sm:text-base">Санкт-Петербург, улица Комиссара Смирнова, 15В, Выборгский ДК</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-blue-300 text-sm sm:text-base"></i>
+                            <span class="text-blue-200 text-sm sm:text-base">+7 (965) 777-90-90</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-blue-300 text-sm sm:text-base"></i>
+                            <span class="text-blue-200 text-sm sm:text-base">info@kdmsenter.ru</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="mt-4">
+                        <p class="text-blue-200 mb-2 text-sm sm:text-base">Мы в соцсетях:</p>
+                        <div class="flex space-x-3 sm:space-x-4">
+                            <a href="https://m.vk.com/therunoflife?from=groups" 
+                               class="bg-blue-800 hover:bg-blue-700 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition"
+                               target="_blank"
+                               title="Наша группа ВКонтакте">
+                               <i class="fab fa-vk text-white text-sm sm:text-base"></i>
+                            </a>
+                            <a href="https://t.me/kinesiologrustam" 
+                               class="bg-blue-800 hover:bg-blue-700 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition"
+                               target="_blank"
+                               title="Написать в Telegram">
+                               <i class="fab fa-telegram text-white text-sm sm:text-base"></i>
+                            </a>
+                            <a href="https://wa.me/+79657779090" 
+                               class="bg-blue-800 hover:bg-blue-700 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition"
+                               target="_blank"
+                               title="Написать в WhatsApp">
+                               <i class="fab fa-whatsapp text-white text-sm sm:text-base"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-blue-800 mt-6 sm:mt-8 pt-4 sm:pt-6 text-center text-blue-300">
+                <p class="text-sm sm:text-base">© 2025 Оздоровительный центр "КДМ". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // карта встроена как iframe (Яндекс Конструктор карт)
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                const icon = mobileMenuButton.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+
+            // Mobile dropdown toggle
+            const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+            mobileDropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const dropdown = this.closest('.mobile-dropdown');
+                    dropdown.classList.toggle('active');
+
+                    const icon = this.querySelector('i');
+                    if (icon) {
+                        icon.classList.toggle('fa-chevron-down');
+                        icon.classList.toggle('fa-chevron-up');
+                    }
+                });
+            });
+
+            // Theme toggle
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    document.body.classList.add('dark');
+                } else {
+                    document.body.classList.remove('dark');
+                }
+            }
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            applyTheme(savedTheme);
+            function toggleTheme() {
+                const next = document.body.classList.contains('dark') ? 'light' : 'dark';
+                localStorage.setItem('theme', next);
+                applyTheme(next);
+            }
+            const themeToggle = document.getElementById('themeToggle');
+            const themeToggleMobile = document.getElementById('themeToggleMobile');
+            if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+            if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+
+            // Form validation
+            const contactForm = document.querySelector('form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('name').value;
+                    const phone = document.getElementById('phone').value;
+                    const service = document.getElementById('service').value;
+                    if (!name || !phone || !service) {
+                        alert('Пожалуйста, заполните все обязательные поля');
+                        return;
+                    }
+                    alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
+                    this.reset();
+                });
+            }
+        });
+        // Force social links to open in a new tab
+        (function(){
+            const selectors = [
+                'a[href^="https://m.vk.com/therunoflife"]',
+                'a[href^="https://t.me/kinesiologrustam"]',
+                'a[href^="https://wa.me/+79657779090"]'
+            ];
+            document.querySelectorAll(selectors.join(',')).forEach(a => {
+                a.setAttribute('target','_blank');
+                a.setAttribute('rel','noopener noreferrer');
+                a.addEventListener('click', function(e){
+                    e.preventDefault();
+                    window.open(this.href, '_blank');
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
